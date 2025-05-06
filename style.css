@@ -69,7 +69,7 @@ main {
     padding-bottom: 12px;
 }
 
-.car-section p {
+.car-section > p { /* Тільки для першого параграфу в секції */
     margin-bottom: 25px; /* Збільшений відступ */
     color: #444;
 }
@@ -124,49 +124,48 @@ main {
      margin-bottom: 15px;
      color: #333;
 }
-.oem-list > p { /* Стиль для описових параграфів безпосередньо в .oem-list */
+.oem-list > p { /* Описовий параграф */
     font-size: 1rem;
     color: #555;
     margin-bottom: 15px;
     line-height: 1.7;
 }
+.oem-list > p strong { /* Виділення уваги */
+    color: #c82333;
+    font-weight: 600;
+}
 
-/* Обгортка для списку OEM, що розкривається */
+/* Обгортка списку OEM */
 .oem-list-wrapper {
     max-height: 210px; /* Орієнтовна висота для ~5-6 елементів li */
     overflow: hidden; /* Ховаємо все, що не влазить */
     position: relative;
     transition: max-height 0.5s ease-in-out; /* Плавна анімація висоти */
     margin-bottom: 15px; /* Відступ перед кнопкою */
-    /* Плавний градієнт знизу, якщо закоментовано - забираємо */
-    /* &::after { ... } */
 }
-
 /* Стиль для розкритого списку */
 .oem-list-wrapper.expanded {
-    max-height: 5000px; /* Дуже велике значення, щоб вмістити будь-яку кількість */
-    /* Ховаємо градієнт коли розкрито */
-    /* &::after { opacity: 0; } */
+    max-height: 5000px; /* Достатньо велике значення, щоб вмістити все */
 }
 
-/* Стилізація списку OEM номерів */
+/* Список OEM */
 .oem-examples {
     list-style: none;
     padding-left: 0;
-    margin-bottom: 0; /* Відступ тепер у wrapper'а */
+    margin-bottom: 0;
 }
-
 .oem-examples li {
     padding: 8px 0;
     font-size: 1rem;
     color: #444;
     border-bottom: 1px dashed #e0e0e0;
+    line-height: 1.5; /* Для кращого вигляду ціни */
 }
 .oem-examples li:last-child {
     border-bottom: none;
 }
 
-/* Стилізація самого OEM номера */
+/* Номер OEM */
 .oem-number {
     font-weight: 600;
     color: #333;
@@ -178,13 +177,14 @@ main {
     padding: 2px 5px;
     border-radius: 3px;
     font-family: 'Courier New', Courier, monospace;
+    white-space: nowrap; /* Заборона переносу номера */
 }
 
-/* Кнопка Розкриття/Приховування списку OEM */
+/* Кнопка Розкриття/Приховування OEM */
 .toggle-oem-list-btn {
     display: block;
     width: fit-content;
-    margin: 0 auto 15px auto; /* Центрування, відступ знизу */
+    margin: 0 auto; /* Центрування кнопки */
     padding: 8px 16px;
     font-size: 0.9rem;
     font-weight: 600;
@@ -195,19 +195,18 @@ main {
     cursor: pointer;
     transition: all 0.2s ease;
 }
-
 .toggle-oem-list-btn:hover {
     background-color: rgba(0, 123, 255, 0.1);
     color: #0056b3;
     border-color: #0056b3;
 }
 
-/* Стиль для завершального параграфу */
+/* Футер списку OEM */
 .oem-list-footer {
     font-size: 0.95rem;
     color: #6c757d;
     margin-bottom: 0;
-    margin-top: 0; /* Забираємо відступ зверху */
+    margin-top: 15px; /* Відступ після кнопки розкриття */
     font-style: italic;
     text-align: center;
 }
@@ -229,13 +228,8 @@ main {
     letter-spacing: 0.5px;
     margin-top: 30px; /* Відступ після блоку OEM та кнопки розкриття */
 }
-
-.check-button:hover {
-    background-color: #0056b3;
-}
-.check-button:active {
-     transform: scale(0.97);
-}
+.check-button:hover { background-color: #0056b3; }
+.check-button:active { transform: scale(0.97); }
 
 /* Розділювач */
 .separator {
@@ -265,22 +259,52 @@ footer {
     margin-bottom: 12px;
     font-size: 1.05rem;
 }
+#contact-section strong { color: #adb5bd; }
 
-#contact-section strong {
-    color: #adb5bd;
+/* Лінія контакту з телефоном та іконками */
+.contact-line {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap; /* Дозволяє перенос на малих екранах */
+    gap: 10px; /* Відстань між елементами */
+    margin-bottom: 12px;
 }
 
-#contact-section a {
+.contact-line strong {
+    margin-right: 5px; /* Відступ після слова "Телефон:" */
+}
+
+.phone-link {
     color: #00aaff;
     text-decoration: none;
     font-weight: bold;
     transition: color 0.2s ease;
+    font-size: 1.1rem; /* Трохи збільшимо телефон */
+    white-space: nowrap;
 }
-
-#contact-section a:hover {
+.phone-link:hover {
     color: #66ccff;
     text-decoration: none;
 }
+
+/* Іконки месенджерів */
+.social-icon {
+    display: inline-flex; /* Для вирівнювання іконки */
+    align-items: center;
+    justify-content: center;
+    color: #f8f9fa; /* Колір іконки */
+    font-size: 1.8rem; /* Розмір іконки */
+    margin-left: 5px; /* Відступ від телефону/попередньої іконки */
+    transition: transform 0.2s ease, color 0.2s ease;
+    text-decoration: none;
+}
+.social-icon:hover {
+    transform: scale(1.15); /* Збільшення при наведенні */
+}
+.social-icon.viber:hover { color: #7360f2; } /* Колір Viber */
+.social-icon.telegram:hover { color: #2AABEE; } /* Колір Telegram */
+
 
 /* Стилі для Модального Вікна (Попап) */
 .modal {
@@ -299,8 +323,6 @@ footer {
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
 }
-
-/* Клас для показу модального вікна */
 .modal.is-visible {
     display: block;
     opacity: 1;
@@ -318,11 +340,9 @@ footer {
     position: relative;
     text-align: center;
     box-shadow: 0 5px 20px rgba(0,0,0,0.25);
-    /* Анімація появи */
     transform: translateY(-20px);
     transition: transform 0.3s ease-out;
 }
-
 .modal.is-visible .modal-content {
      transform: translateY(0);
 }
@@ -338,24 +358,79 @@ footer {
     line-height: 1;
     transition: color 0.2s ease, transform 0.2s ease;
 }
-
 .close-button:hover,
 .close-button:focus {
     color: #333;
     transform: scale(1.1);
 }
 
+/* Стилі для тексту повідомлення в модальному вікні */
 #popup-message {
     font-size: 1.15rem;
     color: #333;
     margin-top: 15px;
     line-height: 1.7;
+    margin-bottom: 25px; /* Відступ перед блоком месенджерів */
 }
 #popup-message strong {
     color: #dc3545;
     font-weight: 600;
     white-space: nowrap;
 }
+
+/* Блок месенджерів у модальному вікні */
+.popup-messengers {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+.popup-messengers span {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+/* Посилання на месенджери в модальному вікні */
+#popup-message .social-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    border: 1px solid transparent;
+}
+#popup-message .social-link i {
+    font-size: 1.3rem;
+}
+/* Стилі для Viber */
+#popup-message .social-link.viber {
+    background-color: #7360f2;
+    color: white;
+    border-color: #7360f2;
+}
+#popup-message .social-link.viber:hover {
+    background-color: #5a47d0;
+    border-color: #5a47d0;
+}
+/* Стилі для Telegram */
+#popup-message .social-link.telegram {
+    background-color: #2AABEE;
+    color: white;
+    border-color: #2AABEE;
+}
+#popup-message .social-link.telegram:hover {
+    background-color: #1e87bd;
+    border-color: #1e87bd;
+}
+
 
 /* --- Адаптивність --- */
 
@@ -368,6 +443,7 @@ footer {
     .check-button { padding: 12px 25px; font-size: 1rem; }
     footer { padding: 30px 15px; }
     #contact-section h2 { font-size: 1.5rem; }
+    .oem-list-wrapper { max-height: 210px; } /* Висота для згорнутого списку */
 }
 
 /* Мобільні телефони */
@@ -376,14 +452,14 @@ footer {
     header { padding: 20px 10px; }
     header h1 { font-size: 1.6rem; }
     header p { font-size: 1rem; }
-    .car-section { padding: 20px 15px; } /* Додав бічні відступи всередині */
+    .car-section { padding: 20px 15px; }
     .car-section h2 { font-size: 1.4rem; }
 
     /* Галерея: 1 фото, адаптоване під ширину */
-    .gallery-viewport { max-width: 100%; margin-bottom: 20px; } /* На всю ширину секції */
+    .gallery-viewport { max-width: 100%; margin-bottom: 20px; }
     .gallery img {
         width: calc(100vw - 50px); /* Ширина екрану мінус відступи body + секції */
-        max-width: 350px; /* Обмеження */
+        max-width: 350px;
         height: auto;
         aspect-ratio: 3 / 2;
     }
@@ -391,17 +467,23 @@ footer {
 
     .oem-list { padding: 15px; }
     .oem-list h3 { font-size: 1.2rem; }
-    .oem-list-wrapper { max-height: 190px; /* Менша висота для мобільних */ }
+    .oem-list-wrapper { max-height: 190px; } /* Менша висота для мобільних */
     .oem-examples li, .oem-list p, .oem-list-footer { font-size: 0.9rem; }
     .oem-number { padding: 1px 4px; }
-    .toggle-oem-list-btn { width: 100%; text-align: center; }
+    .toggle-oem-list-btn { width: 100%; text-align: center; font-size: 0.85rem; padding: 6px 12px;}
 
     .check-button { width: 100%; padding: 15px; font-size: 1rem; margin-top: 25px; }
 
     footer { padding: 25px 10px; }
     #contact-section h2 { font-size: 1.4rem; }
     #contact-section p { font-size: 1rem; }
+    .contact-line { flex-direction: column; gap: 5px; } /* Телефон і іконки в стовпчик */
+    .phone-link { font-size: 1.1rem; }
+    .social-icon { font-size: 1.6rem; margin-left: 0; margin-top: 5px;}
 
     .modal-content { width: 92%; padding: 25px; margin: 20% auto; }
-    #popup-message { font-size: 1.05rem; }
+    #popup-message { font-size: 1.05rem; margin-bottom: 20px; }
+    /* Адаптивність для кнопок месенджерів в модальному */
+    .popup-messengers { gap: 10px; }
+    #popup-message .social-link { width: 90%; justify-content: center; } /* Кнопки на всю ширину */
 }
