@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => { // Весь код все�
 
     // --- ВАШІ КОНТАКТНІ ДАНІ ---
     const phoneNumber = "+380668529330"; // Основний номер для дзвінка
+    const phoneNumber2 = "+380989075420"; // Основний номер для дзвінка
     const viberNumber = "+380675307727"; // Номер для Viber (обов'язково з + та кодом країни)
     const telegramUsername = "chasi1"; // !!! ЗАМІНІТЬ НА ВАШ ЮЗЕРНЕЙМ !!!
     const operatorName = "Мирослав";
@@ -65,14 +66,14 @@ document.addEventListener('DOMContentLoaded', () => { // Весь код все�
     // Додаємо обробники подій для кнопок "Дізнатись Наявність"
     if (lexusButton) {
         lexusButton.addEventListener('click', () => {
-            const baseMessage = `Щоб дізнатися про наявність та ціну запчастини для Вашого Lexus IS, будь ласка, зателефонуйте за номером: <br><strong>${phoneNumber}</strong>. <br>Запитайте <strong>${operatorName}</strong>.`;
+            const baseMessage = `Щоб дізнатися про наявність та ціну запчастини для Вашого Lexus IS, будь ласка, зателефонуйте за номером: <br><strong>${phoneNumber}</strong> <br><strong>${phoneNumber2}</strong> <br>Запитайте <strong>${operatorName}</strong>.`;
             showPopup(baseMessage);
         });
     } else { console.warn("Lexus button not found"); }
 
     if (mazdaButton) {
         mazdaButton.addEventListener('click', () => {
-            const baseMessage = `Щоб дізнатися про наявність та ціну запчастини для Вашої Mazda 5, будь ласка, зателефонуйте за номером: <br><strong>${phoneNumber}</strong>. <br>Запитайте <strong>${operatorName}</strong>.`;
+            const baseMessage = `Щоб дізнатися про наявність та ціну запчастини для Вашої Mazda 5, будь ласка, зателефонуйте за номером: <br><strong>${phoneNumber}</strong> <br><strong>${phoneNumber2}</strong> <br>Запитайте <strong>${operatorName}</strong>.`;
             showPopup(baseMessage);
         });
     } else { console.warn("Mazda button not found"); }
