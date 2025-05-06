@@ -1,0 +1,407 @@
+/* === style.css === */
+
+/* Базові стилі та скидання */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth; /* Плавна прокрутка (опціонально) */
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f9f9f9;
+    padding: 0 15px; /* Відступи по боках на мобільних */
+    /* Стиль для блокування прокрутки */
+    /* Додається/видаляється через JS */
+    &.modal-open {
+        overflow: hidden;
+    }
+}
+
+/* Шапка */
+header {
+    text-align: center;
+    padding: 30px 15px;
+    background-color: #f0f0f0; /* Світлий фон */
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 30px;
+}
+
+header h1 {
+    font-size: 2.2rem; /* Збільшений розмір */
+    margin-bottom: 8px;
+    color: #2c3e50; /* Темно-синій */
+}
+
+header p {
+    font-size: 1.15rem;
+    color: #555;
+}
+
+/* Головний контент */
+main {
+     padding: 0 10px; /* Відступи всередині основного блоку */
+     max-width: 1200px; /* Обмеження ширини основного контенту */
+     margin: 0 auto; /* Центрування */
+}
+
+/* Секції авто */
+.car-section {
+    margin-bottom: 45px; /* Збільшений відступ */
+    padding: 30px; /* Збільшені внутрішні відступи */
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px; /* Трохи більші заокруглення */
+    box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+}
+
+.car-section h2 {
+    font-size: 1.8rem; /* Збільшений розмір */
+    color: #34495e; /* Синій */
+    margin-bottom: 20px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 12px;
+}
+
+.car-section p {
+    margin-bottom: 25px; /* Збільшений відступ */
+    color: #444;
+}
+
+/* Галерея - Контейнер, що обрізає */
+.gallery-viewport {
+    width: 100%;
+    /* Максимальна ширина для 2-х великих фото + відступ */
+    max-width: 920px; /* (2 * 450px) + 20px */
+    overflow: hidden; /* Обрізає все, що не влазить */
+    margin: 0 auto 30px auto; /* Центрування та нижній відступ */
+    position: relative;
+    border-radius: 8px; /* Закруглення для обгортки */
+    background-color: #eee; /* Фон, поки фото не завантажились */
+}
+
+/* Галерея - Контейнер з фото */
+.gallery {
+    display: flex; /* Фото в ряд */
+    flex-wrap: nowrap; /* Без переносу */
+    gap: 20px; /* Відстань між фото */
+    width: max-content; /* Ширина = сумі ширин всіх фото + відступів */
+    /* Плавний перехід для анімації слайдера */
+    transition: transform 0.5s ease-in-out;
+}
+
+/* Галерея - Стилі для фото */
+.gallery img {
+    /* Збільшені розміри */
+    width: 450px;
+    height: 300px;
+    object-fit: cover; /* Обрізає фото, зберігаючи пропорції */
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    flex-shrink: 0; /* Забороняємо зменшуватись */
+    display: block; /* Забирає зайвий відступ під зображенням */
+    background-color: #f0f0f0; /* Фон для зображення поки воно не завантажилось */
+}
+
+/* Список OEM */
+.oem-list {
+    margin-top: 30px; /* Відступ зверху */
+    margin-bottom: 15px; /* Зменшили відступ перед кнопкою розкриття */
+    padding: 25px; /* Трохи більше відступ */
+    background-color: #f8f9fa; /* Трохи інший фон */
+    border-left: 5px solid #17a2b8; /* Бірюзовий акцент */
+    border-radius: 5px;
+}
+.oem-list h3 {
+     font-size: 1.3rem; /* Трохи більше */
+     margin-bottom: 15px;
+     color: #333;
+}
+.oem-list > p { /* Стиль для описових параграфів безпосередньо в .oem-list */
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 15px;
+    line-height: 1.7;
+}
+
+/* Обгортка для списку OEM, що розкривається */
+.oem-list-wrapper {
+    max-height: 210px; /* Орієнтовна висота для ~5-6 елементів li */
+    overflow: hidden; /* Ховаємо все, що не влазить */
+    position: relative;
+    transition: max-height 0.5s ease-in-out; /* Плавна анімація висоти */
+    margin-bottom: 15px; /* Відступ перед кнопкою */
+    /* Плавний градієнт знизу, якщо закоментовано - забираємо */
+    /* &::after { ... } */
+}
+
+/* Стиль для розкритого списку */
+.oem-list-wrapper.expanded {
+    max-height: 5000px; /* Дуже велике значення, щоб вмістити будь-яку кількість */
+    /* Ховаємо градієнт коли розкрито */
+    /* &::after { opacity: 0; } */
+}
+
+/* Стилізація списку OEM номерів */
+.oem-examples {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 0; /* Відступ тепер у wrapper'а */
+}
+
+.oem-examples li {
+    padding: 8px 0;
+    font-size: 1rem;
+    color: #444;
+    border-bottom: 1px dashed #e0e0e0;
+}
+.oem-examples li:last-child {
+    border-bottom: none;
+}
+
+/* Стилізація самого OEM номера */
+.oem-number {
+    font-weight: 600;
+    color: #333;
+    margin-right: 8px;
+    user-select: all;
+    -webkit-user-select: all;
+    -moz-user-select: all;
+    background-color: #e9ecef;
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+/* Кнопка Розкриття/Приховування списку OEM */
+.toggle-oem-list-btn {
+    display: block;
+    width: fit-content;
+    margin: 0 auto 15px auto; /* Центрування, відступ знизу */
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #007bff;
+    background-color: transparent;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.toggle-oem-list-btn:hover {
+    background-color: rgba(0, 123, 255, 0.1);
+    color: #0056b3;
+    border-color: #0056b3;
+}
+
+/* Стиль для завершального параграфу */
+.oem-list-footer {
+    font-size: 0.95rem;
+    color: #6c757d;
+    margin-bottom: 0;
+    margin-top: 0; /* Забираємо відступ зверху */
+    font-style: italic;
+    text-align: center;
+}
+
+/* Кнопка "Дізнатись Наявність" */
+.check-button {
+    display: inline-block;
+    background-color: #007bff;
+    color: #fff;
+    padding: 14px 30px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 30px; /* Відступ після блоку OEM та кнопки розкриття */
+}
+
+.check-button:hover {
+    background-color: #0056b3;
+}
+.check-button:active {
+     transform: scale(0.97);
+}
+
+/* Розділювач */
+.separator {
+    border: none;
+    height: 1px;
+    background-color: #ccc;
+    margin: 50px auto;
+    width: 70%;
+}
+
+/* Підвал (Контакти) */
+footer {
+    margin-top: 50px;
+    padding: 40px 15px;
+    background-color: #343a40;
+    color: #f8f9fa;
+    text-align: center;
+}
+
+#contact-section h2 {
+    font-size: 1.6rem;
+    margin-bottom: 25px;
+    color: #fff;
+}
+
+#contact-section p {
+    margin-bottom: 12px;
+    font-size: 1.05rem;
+}
+
+#contact-section strong {
+    color: #adb5bd;
+}
+
+#contact-section a {
+    color: #00aaff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.2s ease;
+}
+
+#contact-section a:hover {
+    color: #66ccff;
+    text-decoration: none;
+}
+
+/* Стилі для Модального Вікна (Попап) */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Клас для показу модального вікна */
+.modal.is-visible {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 35px;
+    border: none;
+    width: 90%;
+    max-width: 550px;
+    border-radius: 10px;
+    position: relative;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.25);
+    /* Анімація появи */
+    transform: translateY(-20px);
+    transition: transform 0.3s ease-out;
+}
+
+.modal.is-visible .modal-content {
+     transform: translateY(0);
+}
+
+.close-button {
+    color: #888;
+    position: absolute;
+    top: 12px;
+    right: 18px;
+    font-size: 32px;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #333;
+    transform: scale(1.1);
+}
+
+#popup-message {
+    font-size: 1.15rem;
+    color: #333;
+    margin-top: 15px;
+    line-height: 1.7;
+}
+#popup-message strong {
+    color: #dc3545;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* --- Адаптивність --- */
+
+/* Планшети і менші десктопи */
+@media (max-width: 960px) {
+    header h1 { font-size: 2rem; }
+    .car-section h2 { font-size: 1.6rem; }
+    .gallery-viewport { max-width: 450px; margin-bottom: 25px; }
+    .gallery img { width: 450px; height: 300px; }
+    .check-button { padding: 12px 25px; font-size: 1rem; }
+    footer { padding: 30px 15px; }
+    #contact-section h2 { font-size: 1.5rem; }
+}
+
+/* Мобільні телефони */
+@media (max-width: 480px) {
+    body { padding: 0 10px; }
+    header { padding: 20px 10px; }
+    header h1 { font-size: 1.6rem; }
+    header p { font-size: 1rem; }
+    .car-section { padding: 20px 15px; } /* Додав бічні відступи всередині */
+    .car-section h2 { font-size: 1.4rem; }
+
+    /* Галерея: 1 фото, адаптоване під ширину */
+    .gallery-viewport { max-width: 100%; margin-bottom: 20px; } /* На всю ширину секції */
+    .gallery img {
+        width: calc(100vw - 50px); /* Ширина екрану мінус відступи body + секції */
+        max-width: 350px; /* Обмеження */
+        height: auto;
+        aspect-ratio: 3 / 2;
+    }
+    .gallery { gap: 15px; }
+
+    .oem-list { padding: 15px; }
+    .oem-list h3 { font-size: 1.2rem; }
+    .oem-list-wrapper { max-height: 190px; /* Менша висота для мобільних */ }
+    .oem-examples li, .oem-list p, .oem-list-footer { font-size: 0.9rem; }
+    .oem-number { padding: 1px 4px; }
+    .toggle-oem-list-btn { width: 100%; text-align: center; }
+
+    .check-button { width: 100%; padding: 15px; font-size: 1rem; margin-top: 25px; }
+
+    footer { padding: 25px 10px; }
+    #contact-section h2 { font-size: 1.4rem; }
+    #contact-section p { font-size: 1rem; }
+
+    .modal-content { width: 92%; padding: 25px; margin: 20% auto; }
+    #popup-message { font-size: 1.05rem; }
+}
