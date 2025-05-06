@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => { // Весь код все�
     const closeButton = modal ? modal.querySelector('.close-button') : null;
 
     // --- ВАШІ КОНТАКТНІ ДАНІ ---
-    const phoneNumber = "+380668629330"; // Основний номер для дзвінка
+    const phoneNumber = "+380668529330"; // Основний номер для дзвінка
     const viberNumber = "+380675307727"; // Номер для Viber (обов'язково з + та кодом країни)
     const telegramUsername = "chasi1"; // !!! ЗАМІНІТЬ НА ВАШ ЮЗЕРНЕЙМ !!!
     const operatorName = "Мирослав";
